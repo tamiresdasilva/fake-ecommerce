@@ -1,8 +1,8 @@
-import { getProdutos } from "../services/api.js"
+import { getProdutos } from "../services/api.js";
 
 export function Header() {
-    const header = document.createElement('header')
-    header.className = 'app-header'
+    const header = document.createElement('header');
+    header.className = 'app-header';
     header.innerHTML = `
     <nav>
         <a class="logo" href="#/home" data-route="/home">Fake E-Commerce</a>
@@ -23,52 +23,55 @@ export function Header() {
     </nav>
     `;
 
-    // Mobile Navbar
     class MobileNavbar {
         constructor(header, mobileMenu, navList, navLinks) {
-            this.header = header
-            this.mobileMenu = header.querySelector(mobileMenu)
-            this.navList = header.querySelector(navList)
-            this.navLinks = header.querySelectorAll(navLinks)
-            this.activeClass = "active"
-            this.handleClick = this.handleClick.bind(this)
+            this.header = header;
+            this.mobileMenu = header.querySelector(mobileMenu);
+            this.navList = header.querySelector(navList);
+            this.navLinks = header.querySelectorAll(navLinks);
+            this.activeClass = "active";
+            this.handleClick = this.handleClick.bind(this);
         }
+
         animateLinks() {
             this.navLinks.forEach((link, index) => {
                 link.style.animation
                     ? (link.style.animation = "")
-                    : (link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`)
-            })
+                    : (link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`);
+            });
         }
+
         handleClick() {
-            this.navList.classList.toggle(this.activeClass)
-            this.mobileMenu.classList.toggle(this.activeClass)
-            this.animateLinks()
+            this.navList.classList.toggle(this.activeClass);
+            this.mobileMenu.classList.toggle(this.activeClass);
+            this.animateLinks();
         }
+
         addClickEvent() {
-            this.mobileMenu.addEventListener("click", this.handleClick)
+            this.mobileMenu.addEventListener("click", this.handleClick);
         }
+
         init() {
-            if (this.mobileMenu) this.addClickEvent()
-            return this
+            if (this.mobileMenu) this.addClickEvent();
+            return this;
         }
     }
 
-    new MobileNavbar(header, ".mobile-menu", ".nav-list", ".nav-list li").init()
+    new MobileNavbar(header, ".mobile-menu", ".nav-list", ".nav-list li").init();
 
-    // Navegação SPA
-    const links = header.querySelectorAll("a[data-route]")
+    const links = header.querySelectorAll("a[data-route]");
     links.forEach(link => {
         link.addEventListener("click", (e) => {
-            e.preventDefault()
-            const route = link.getAttribute("data-route")
-            window.dispatchEvent(new CustomEvent("routechange", { detail: { path: route } }))
-        })
-    })
+            e.preventDefault();
+            const route = link.getAttribute("data-route");
+            window.dispatchEvent(new CustomEvent("routechange", { detail: { path: route } }));
+        });
+    });
 
-    // Barra de busca
+    //Barra de busca
     async function setupSearch(header) {
         const container = header.querySelector("#search-container");
+
         const inputWrapper = document.createElement("div");
         inputWrapper.className = "input-wrapper";
 
@@ -79,53 +82,97 @@ export function Header() {
 
         const searchButton = document.createElement("button");
         searchButton.id = "search-button";
-        searchButton.innerHTML = `<img src="./assets/images/lupa2.png" alt="Buscar" width=25>`;
+        searchButton.innerHTML = "🔍";
 
         inputWrapper.appendChild(input);
         inputWrapper.appendChild(searchButton);
         container.appendChild(inputWrapper);
 
+        //Cria a lista de pré-visualização
+        const ul = document.createElement("ul");
+        ul.id = "listaProdutos";
+        ul.style.display = "none";
+        container.appendChild(ul);
+
         let produtos = [];
         try {
             produtos = await getProdutos();
+            produtos.forEach(item => {
+                const li = document.createElement("li");
+                li.innerHTML = `
+                    <a href="#/product/${item.id}" data-route="/product/${item.id}">
+                        <img src="${item.image}" alt="${item.title}">
+                        <span class="item-name">${item.title}</span>
+                    </a>
+                `;
+                ul.appendChild(li);
+            });
+
+            //SPA nos links do dropdown
+            const dropLinks = ul.querySelectorAll("a[data-route]");
+            dropLinks.forEach(link => {
+                link.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    const route = link.getAttribute("data-route");
+                    window.dispatchEvent(new CustomEvent("routechange", { detail: { path: route } }));
+                    ul.style.display = "none";
+                    input.value = "";
+                });
+            });
+
         } catch (erro) {
             console.error("Erro ao carregar produtos: ", erro);
         }
 
-        function buscarProdutos() {
-            const main = document.querySelector("main");
-            main.innerHTML = ""; // limpa o main
-
+        //Função de filtragem e pré-visualização
+        input.addEventListener("keyup", () => {
             const filter = input.value.toUpperCase();
-            const resultados = produtos.filter(p => p.title.toUpperCase().includes(filter));
+            const li = ul.getElementsByTagName("li");
+            let count = 0;
 
-            if (resultados.length === 0) {
-                const p = document.createElement("p");
+            for (let i = 0; i < li.length; i++) {
+                const a = li[i].getElementsByTagName("a")[0];
+                const txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                    count++;
+                    const span = li[i].querySelector(".item-name");
+                    if (span) {
+                        span.innerHTML = txtValue.replace(new RegExp(filter, "gi"), (match) => `<strong>${match}</strong>`);
+                    }
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+
+            ul.style.display = count > 0 ? "block" : "none";
+
+            //Se não encontrar nada, mostra mensagem
+            const main = document.querySelector("main");
+            if (filter && count === 0) {
                 main.innerHTML = `
                     <div class="empty-title">Oops!</div>
                     <p class="empty-message">
                         Nenhum resultado encontrado.<br>
                         Tente verificar a ortografia ou usar termos mais genéricos.<br>
                         Consulte a página inicial contendo todos os produtos para ver as opções de compra.
-                    </p>                
-                `
-            } else {
-                resultados.forEach(item => {
-                    const div = document.createElement("div");
-                    div.className = "produto-card";
-                    div.innerHTML = `
-                        <img src="${item.image}" alt="${item.title}">
-                        <h3>${item.title}</h3>
-                        <p>$${item.price}</p>
-                    `;
-                    main.appendChild(div);
-                });
+                    </p>
+                `;
+            } else if (!filter) {
+                main.innerHTML = ""; //limpa se input vazio
             }
-        }
+        });
 
-        searchButton.addEventListener("click", buscarProdutos);
-        input.addEventListener("keypress", (e) => {
-            if (e.key === "Enter") buscarProdutos();
+        //Fecha dropdown ao perder foco
+        input.addEventListener("blur", () => {
+            setTimeout(() => {
+                ul.style.display = "none";
+            }, 150);
+        });
+
+        //Busca ao clicar no botão
+        searchButton.addEventListener("click", () => {
+            input.dispatchEvent(new KeyboardEvent('keyup'));
         });
     }
 

@@ -193,7 +193,7 @@ aside .box > button.finalizar:hover {
 }
 
 @media screen and (max-width: 500px) {
-    /* Centraliza o container geral */
+    /*Centraliza o container geral*/
     .carrinho-page .content {
         display: flex;
         flex-direction: column;
@@ -203,21 +203,21 @@ aside .box > button.finalizar:hover {
         margin: 0 auto;
     }
 
-    /* Aside menor e proporcional */
+    /*Aside menor e proporcional*/
     aside {
         width: 90%;      /* ocupa 90% do container centralizado */
         max-width: 400px; /* limite máximo para não ficar enorme */
         margin-top: 20px;
     }
 
-    /* Título centralizado */
+    /*Título centralizado*/
     .carrinho-page .page-title {
         text-align: center;
         font-size: 28px;
         margin-bottom: 20px;
     }
 
-    /* Cards responsivos */
+    /*Cards responsivos*/
     table thead { display: none; }
     table tbody tr {
         display: block;
@@ -264,19 +264,19 @@ aside .box > button.finalizar:hover {
 @media screen and (min-width: 768px) and (max-width: 1024px) {
     /* Empilha produtos e aside verticalmente */
     .carrinho-page .content {
-        flex-direction: column; /* deixa a lista de produtos em cima e aside embaixo */
+        flex-direction: column; /*deixa a lista de produtos em cima e aside embaixo */
         gap: 20px;
-        align-items: center; /* centraliza horizontalmente */
+        align-items: center; /*centraliza horizontalmente*/
     }
 
     /* Aside menor e centralizado */
     aside {
         width: 90%;      /* ocupa 90% do container */
-        max-width: 400px; /* limite máximo */
+        max-width: 400px; /*limite máximo */
         margin-top: 20px;
     }
 
-    /* Section de produtos ocupa toda largura disponível */
+    /*Section de produtos ocupa toda largura disponível*/
     section {
         width: 100%;
     }
