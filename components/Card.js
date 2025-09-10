@@ -22,20 +22,31 @@ export function Card(produto) {
     `
     // Botão de favoritar
     const favBtn = card.querySelector(".fav-btn")
+
+    // Se já estiver nos favoritos, aplica a classe
+    let favoritos = JSON.parse(localStorage.getItem("favoritos")) || []
+    if (favoritos.some(p => p.id === produto.id)) {
+        favBtn.classList.add("favorito")
+        favBtn.setAttribute("title", "Desfavoritar")
+    } else {
+        favBtn.setAttribute("title", "Favoritar")
+    }
+
     favBtn.addEventListener("click", () => {
         let favoritos = JSON.parse(localStorage.getItem("favoritos")) || []
 
-        const itemExistente = favoritos.find(p => p.id === produto.id)
-
-        if (itemExistente) {
+        if (favoritos.some(p => p.id === produto.id)) {
             favoritos = favoritos.filter(p => p.id !== produto.id)
             favBtn.classList.remove("favorito")
+            favBtn.setAttribute("title", "Favoritar")
         } else {
             favoritos.push(produto)
             favBtn.classList.add("favorito")
+            favBtn.setAttribute("title", "Desfavoritar")
         }
         localStorage.setItem("favoritos", JSON.stringify(favoritos))
     })
+
 
     // SPA para detalhes
     const detalhesBtn = card.querySelector(".detalhes-btn")
@@ -47,6 +58,7 @@ export function Card(produto) {
     })
 
     const cartBtn = card.querySelector(".cart-btn")
+    cartBtn.setAttribute("title", "Adicionar ao Carrinho")
     cartBtn.addEventListener("click", () => {
         //Pega carrinho do localStorage
         let carrinho = JSON.parse(localStorage.getItem("carrinho")) || []
