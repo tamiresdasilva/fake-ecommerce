@@ -63,7 +63,7 @@ Este projeto foi desenvolvido como **atividade avaliativa da disciplina Desenvol
    ```bash
    git clone <https://github.com/tamiresdasilva/fake-ecommerce.git>
 2. Abra o projeto em uma IDE ou editor de sua preferência.
-3. Abra o projeto usando um servidor local (ex: Live Server do VS Code ou qualquer outro).
+3. Selecione o `index.html` e o abra usando um servidor de desenvolvimento local (ex: extensão Live Server do VS Code ou qualquer outro de sua preferência).
 4. Navegue pela aplicação normalmente: Home, Favoritos, Carrinho e Detalhes dos produtos.
 
 
