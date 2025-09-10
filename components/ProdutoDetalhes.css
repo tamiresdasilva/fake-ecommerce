@@ -1,0 +1,125 @@
+.produto-detalhes {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+.detalhes-card {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+    max-width: 900px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin: 20px;
+}
+
+.detalhes-img {
+    width: 250px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.detalhes-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.detalhes-title {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.detalhes-category {
+    font-size: 1rem;
+    color: #333;
+}
+
+.detalhes-rating {
+    font-size: 1rem
+}
+
+.detalhes-description {
+    font-size: 1rem;
+    color: #333;
+}
+
+.detalhes-price {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+.detalhes-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.detalhes-buttons button {
+    padding: 6px 14px;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    background-color: #0f1111;
+    color: #fff;
+    transition: all 0.2s ease;
+}
+
+.detalhes-buttons button:hover,
+.detalhes-buttons button:active {
+    border: 2px solid orange;
+    color: orange;
+}
+
+/*TABLET*/
+@media (max-width: 768px){
+    .detalhes-card {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 15px;
+    }
+    .detalhes-img{
+        width: 200px;
+    }
+    .detalhes-info{
+        width: 100%;
+        text-align: center;
+    }
+    .detalhes-buttons {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+
+/* Celular */
+@media (max-width: 480px) {
+    .detalhes-card {
+        padding: 10px;
+    }
+    .detalhes-img {
+        width: 150px;
+    }
+    .detalhes-price {
+        font-size: 1.4rem;
+    }
+    .detalhes-buttons {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .detalhes-buttons button {
+        width: 100%;
+    }
+}
