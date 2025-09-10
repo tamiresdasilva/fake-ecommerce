@@ -10,7 +10,7 @@ Este projeto foi desenvolvido como **atividade avaliativa da disciplina Desenvol
 
 ---
 ## ✨ Funcionalidades
-- Carrega produtos dinamicamente via FakeStoreAp
+- Carrega produtos dinamicamente via FakeStoreApi
 - Barra de pesquisa dinâmica com filtro por nome e feedback quando não há resultados
 - Página inicial exibindo todos os produtos
 - Página de detalhes para cada produto  
@@ -65,5 +65,6 @@ Este projeto foi desenvolvido como **atividade avaliativa da disciplina Desenvol
 2. Abra o projeto em uma IDE ou editor de sua preferência.
 3. Abra o projeto usando um servidor local (ex: Live Server do VS Code ou qualquer outro).
 4. Navegue pela aplicação normalmente: Home, Favoritos, Carrinho e Detalhes dos produtos.
+
 
 
