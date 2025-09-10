@@ -101,11 +101,14 @@ export function Header() {
 
             if (resultados.length === 0) {
                 const p = document.createElement("p");
-                p.className = "no-results";
-                p.innerHTML = `Nenhum resultado encontrado.<br>
-                Tente verificar a ortografia ou usar termos mais genéricos.<br>
-                Consulte a página inicial contendo todos os produtos para ver as opções de compra.`;
-                main.appendChild(p);
+                main.innerHTML = `
+                    <div class="empty-title">Oops!</div>
+                    <p class="empty-message">
+                        Nenhum resultado encontrado.<br>
+                        Tente verificar a ortografia ou usar termos mais genéricos.<br>
+                        Consulte a página inicial contendo todos os produtos para ver as opções de compra.
+                    </p>                
+                `
             } else {
                 resultados.forEach(item => {
                     const div = document.createElement("div");

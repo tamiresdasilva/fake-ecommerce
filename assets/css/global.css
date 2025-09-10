@@ -3,3 +3,29 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+/* Título das páginas (padronizado) */
+.page-title {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    color: #0f1111;
+    margin-bottom: 20px;
+}
+
+/* Mensagem de aviso quando não há produtos */
+.empty-message {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 15px;
+    color: #444;
+}
+
+.empty-title {
+    margin-top: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    color: #0f1111;
+    margin-bottom: 10px;
+}

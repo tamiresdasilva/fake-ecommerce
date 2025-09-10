@@ -16,10 +16,14 @@ export function Favoritos() {
     const favoritos = JSON.parse(localStorage.getItem("favoritos")) || []
 
     if (favoritos.length === 0) {
-        const mensagem = document.createElement("p")
-        mensagem.textContent = "Você ainda não adicionou nenhum produto aos favoritos."
-        containerProdutos.appendChild(mensagem)
-    } else {
+        main.innerHTML = `
+        <div class="page-title">Meus Favoritos</div>
+        <p class="empty-message">
+            Você ainda não adicionou nenhum produto aos favoritos.
+        </p>
+    `
+        return main;
+    }else {
         favoritos.forEach(produto => {
             const card = Card(produto)
             containerProdutos.appendChild(card)
@@ -42,6 +46,6 @@ export function Favoritos() {
             })
         })
     }
-    
+
     return main
 }

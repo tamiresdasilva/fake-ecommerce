@@ -10,6 +10,16 @@ export function Carrinho() {
 
     let carrinho = getCarrinhoAtualizado();
 
+    if (carrinho.length === 0) {
+        main.innerHTML = `
+            <div class="page-title">Meu Carrinho</div>
+            <p class="empty-message">
+                Você ainda não adicionou nenhum produto ao carrinho.
+            </p>
+        `
+        return main;
+    }
+
     main.innerHTML = `
         <div class="page-title">Meu Carrinho</div>
         <div class="content">
@@ -64,7 +74,16 @@ export function Carrinho() {
     function removerProduto(id) {
         carrinho = carrinho.filter(p => p.id !== id);
         localStorage.setItem("carrinho", JSON.stringify(carrinho));
-        renderizarCarrinho();
+        if (carrinho.length === 0) {
+            main.innerHTML = `
+                <div class="page-title">Meu Carrinho</div>
+                <p class="empty-message">
+                    Você ainda não adicionou nenhum produto ao carrinho.
+                </p>
+            `
+        } else {
+            renderizarCarrinho()
+        }
     }
 
     function renderizarCarrinho() {
@@ -75,6 +94,19 @@ export function Carrinho() {
         });
         atualizarSubtotal();
     }
+
+    const finalizarBtn = main.querySelector(".finalizar")
+    finalizarBtn.addEventListener("click", () => {
+        alert("Compra realizada com sucesso!")
+        localStorage.removeItem("carrinho")
+        carrinho = []
+        main.innerHTML = `
+            <div class="page-title">Meu Carrinho</div>
+            <p class="empty-message">
+                Você ainda não adicionou nenhum produto ao carrinho.
+            </p>
+        `
+    })
 
     renderizarCarrinho();
 

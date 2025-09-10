@@ -192,3 +192,100 @@ aside .box > button.finalizar:hover {
     color: orange;
     cursor: pointer;
 }
+
+@media screen and (max-width: 500px) {
+    /* Centraliza o container geral */
+    .carrinho-page .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* centraliza cards e aside horizontalmente */
+        gap: 20px;
+        width: 100%;
+        /* max-width: 600px; limite do container */
+        margin: 0 auto;
+    }
+
+    /* Aside menor e proporcional */
+    aside {
+        width: 90%;      /* ocupa 90% do container centralizado */
+        max-width: 400px; /* limite máximo para não ficar enorme */
+        margin-top: 20px;
+    }
+
+    /* Título centralizado */
+    .carrinho-page .page-title {
+        text-align: center;
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    /* Cards responsivos */
+    table thead { display: none; }
+    table tbody tr {
+        display: block;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 15px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    table tbody tr td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        position: relative;
+    }
+
+    table tbody tr td:nth-child(2)::before { content: "Preço:"; font-weight: bold; margin-right: 5px; }
+    table tbody tr td:nth-child(3)::before { content: "Quantidade:"; font-weight: bold; margin-right: 5px; }
+    table tbody tr td:nth-child(4)::before { content: "Total:"; font-weight: bold; margin-right: 5px; }
+    table tbody tr td:nth-child(5)::before { content: "Ações:"; font-weight: bold; margin-right: 5px; }
+
+    .product {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .product img {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 8px;
+    }
+
+    .product .info .name { font-size: 16px; margin-bottom: 5px; }
+    .product .info .category { font-size: 14px; color: #666; margin-bottom: 5px; }
+
+    .quantity { min-width: 60px; height: 28px; }
+}
+
+/* ----------- TELA MÉDIA (tablet/iPad) ----------- */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    /* Empilha produtos e aside verticalmente */
+    .carrinho-page .content {
+        flex-direction: column; /* deixa a lista de produtos em cima e aside embaixo */
+        gap: 20px;
+        align-items: center; /* centraliza horizontalmente */
+    }
+
+    /* Aside menor e centralizado */
+    aside {
+        width: 90%;      /* ocupa 90% do container */
+        max-width: 400px; /* limite máximo */
+        margin-top: 20px;
+    }
+
+    /* Section de produtos ocupa toda largura disponível */
+    section {
+        width: 100%;
+    }
+
+    /* Título centralizado */
+    .carrinho-page .page-title {
+        text-align: center;
+    }
+}
