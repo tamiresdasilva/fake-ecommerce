@@ -20,7 +20,6 @@ export function Card(produto) {
         
         <a href="#/product/${produto.id}" data-route="/product/${produto.id}" class="detalhes-btn">Ver Detalhes</a>
     `
-    // Botão de favoritar
     const favBtn = card.querySelector(".fav-btn")
 
     // Se já estiver nos favoritos, aplica a classe

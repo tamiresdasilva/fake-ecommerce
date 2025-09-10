@@ -4,7 +4,6 @@
     box-sizing: border-box;
 }
 
-/* Título das páginas (padronizado) */
 .page-title {
     font-size: 28px;
     font-weight: bold;
@@ -13,7 +12,6 @@
     margin-bottom: 20px;
 }
 
-/* Mensagem de aviso quando não há produtos */
 .empty-message {
     text-align: center;
     font-size: 18px;
